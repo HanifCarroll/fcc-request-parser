@@ -14,7 +14,8 @@ function getInfo (req) {
 	const software = pattern
 		.exec(req['headers']['user-agent'])[0]
 		.replace(/[\\(\\)]/g,'')
-		.replace('::ffff:', '');
+		.slice(7);
+	
 	return {
 		ipaddress,
 		language,
