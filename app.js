@@ -8,13 +8,14 @@ app.get('/', (req, res) => {
 });
 
 function getInfo (req) {
-	const ipaddress = req.ip || req.connection.remoteAddress;
+	let ipaddress = req.ip || req.connection.remoteAddress;
+	ipaddress = ipaddress.replace('::ffff:', '')
 	const language = req['headers']['accept-language'].split(',')[0];
 	const pattern = /\(.*?\)/;
 	const software = pattern
 		.exec(req['headers']['user-agent'])[0]
-		.replace(/[\\(\\)]/g,'')
-		.slice(7);
+		.replace(/[\\(\\)]/g,'');
+	
 	
 	return {
 		ipaddress,
