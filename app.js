@@ -11,7 +11,10 @@ function getInfo (req) {
 	const ipaddress = req.ip || req.connection.remoteAddress;
 	const language = req['headers']['accept-language'].split(',')[0];
 	const pattern = /\(.*?\)/;
-	const software = pattern.exec(req['headers']['user-agent'])[0].replace(/[\\(\\)]/g,'');
+	const software = pattern
+		.exec(req['headers']['user-agent'])[0]
+		.replace('::ffff', '')
+		.replace(/[\\(\\)]/g,'');
 	return {
 		ipaddress,
 		language,
